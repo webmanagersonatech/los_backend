@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import Work from "./model";
 import { AuthRequest } from "../../middlewares/auth";
 import { createWorkSchema } from "./work.sanitize";
+import Meeting from "../meeting/model";
 import Team from "../teams/model";
 
 import twilio from "twilio";
@@ -103,6 +104,16 @@ export const createWork = async (
         (team: any) => team._id
       ),
     });
+
+    if (value.meetingId) {
+      await Meeting.findOneAndUpdate(
+        { meetingId: value.meetingId },
+        {
+          workId: work.workId,
+        },
+        { new: true }
+      );
+    }
 
     // SEND WHATSAPP MESSAGE
     for (const team of teamLeadDetails) {

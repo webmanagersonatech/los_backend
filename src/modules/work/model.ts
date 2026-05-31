@@ -10,17 +10,17 @@ export interface IWork extends Document {
   assignToTeamIds: string[];
 
   deadline: Date;
-
+  meetingId?: string;
   priority: "low" | "medium" | "high";
 
   description?: string;
 
   status:
-    | "pending"
-    | "in_progress"
-    | "completed"
-    | "on_hold"
-    | "cancelled";
+  | "pending"
+  | "in_progress"
+  | "completed"
+  | "on_hold"
+  | "cancelled";
 
   createdBy: mongoose.Types.ObjectId;
 }
@@ -33,7 +33,10 @@ const WorkSchema = new Schema<IWork>(
       unique: true,
       required: true,
     },
-
+    meetingId: {
+      type: String,
+      default: null,
+    },
     // WORK TITLE
     workTitle: {
       type: String,

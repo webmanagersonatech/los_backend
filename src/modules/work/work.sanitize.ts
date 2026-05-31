@@ -17,7 +17,9 @@ export const createWorkSchema = Joi.object({
   description: Joi.string()
     .allow("")
     .optional(),
-
+  meetingId: Joi.string()  // Add this field
+    .optional()
+    .allow(null, ""),
   status: Joi.string()
     .valid(
       "pending",
