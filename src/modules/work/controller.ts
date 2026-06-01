@@ -446,11 +446,15 @@ export const listWorks = async (
     const limit = parseInt(req.query.limit as string) || 10;
     const search = (req.query.search as string) || "";
     const status = (req.query.status as string) || "all";
+    const meetingId = req.query.meetingId as string;
     const priority =
       (req.query.priority as string) || "all";
 
     const query: any = {};
-
+    // Meeting Filter
+    if (meetingId) {
+      query.meetingId = meetingId;
+    }
     // SEARCH
     if (search.trim()) {
       query.$or = [

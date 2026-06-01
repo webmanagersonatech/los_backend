@@ -615,20 +615,21 @@ export const getMeeting = async (
   res: Response
 ) => {
   try {
-    const meeting =
-      await Meeting.findById(
-        req.params.id
-      )
-        .populate({
-          path: "teams",
+    const meeting = await Meeting.findById(req.params.id)
+      .populate({
+        path: "teams",
+        select: "teamName teamType teamLeadId teamId",
+        populate: {
+          path: "teamLead",
           select:
-            "teamName teamType teamLeadId teamId",
-          populate: {
-            path: "teamLead",
-            select:
-              "fullName email phone photoBase64 role teamMemberId",
-          },
-        });
+            "fullName email phone photoBase64 role teamMemberId",
+        },
+      })
+      .populate({
+        path: "work",
+        select:
+          "workId workTitle priority status deadline",
+      });
 
     if (!meeting) {
       return res.status(404).json({
@@ -704,7 +705,7 @@ export const listMeetings = async (
             createdAt: -1,
           },
           populate: [
-           
+
             {
               path: "work",
               select:

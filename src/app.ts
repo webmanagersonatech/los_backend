@@ -10,6 +10,7 @@ import dashboardRoutes from './modules/dashboard/routes';
 import workRoutes from './modules/work/routes';
 import otpRoutes from './modules/otp/routes';
 import mettingRoutes from './modules/meeting/routes';
+import teamtypeRoutes from './modules/team-types/routes'
 
 
 import { logger } from './middlewares/logger';
@@ -44,6 +45,7 @@ app.use('/api/meeting', mettingRoutes);
 app.use('/api/settings', settingsRoutes);
 app.use('/api/work', workRoutes);
 app.use('/api/dashboard', dashboardRoutes);
+app.use('/api/team-types', teamtypeRoutes);
 app.use('/api/otp', otpRoutes);
 
 
