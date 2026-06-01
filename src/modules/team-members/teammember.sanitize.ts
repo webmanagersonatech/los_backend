@@ -5,13 +5,13 @@ export const createTeamMemberSchema = Joi.object({
 
   email: Joi.string()
     .email()
-    .required(),
+    .optional().allow(""),
 
   phone: Joi.string().required(),
 
-  role: Joi.string().required(),
+  role: Joi.string().optional().allow(""),
 
-  photoBase64: Joi.string().optional(),
+  photoBase64: Joi.string().optional().allow(""),
 
   status: Joi.string()
     .valid("active", "inactive")

@@ -28,7 +28,7 @@ const TeamMemberSchema = new Schema<ITeamMember>(
 
     email: {
       type: String,
-      required: true,
+
       unique: true,
     },
 
@@ -39,7 +39,7 @@ const TeamMemberSchema = new Schema<ITeamMember>(
 
     role: {
       type: String,
-      required: true,
+
     },
 
     photoBase64: {
